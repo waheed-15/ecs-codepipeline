@@ -1,0 +1,5 @@
+aws_region = "us-east-1"
+image_repo_name = "flask-application-demo"
+image_repo_url = "847415613895.dkr.ecr.us-west-2.amazonaws.com/flask-application-demo"
+image_tag = "latest"
+tag_immutability = "MUTABLE"
