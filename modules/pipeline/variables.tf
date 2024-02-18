@@ -28,7 +28,7 @@ variable "image_tag" {
 }
 
 variable "image_repo_url" {
-  default = "847415613895.dkr.ecr.us-west-2.amazonaws.com/flask-application-demo"
+  default = "847415613895.dkr.ecr.us-east-1.amazonaws.com/flask-application-demo"
 }
 
 variable "github_repo_owner" {
