@@ -7,15 +7,15 @@ variable "aws_region" {
 }
 
 variable "vpc_id" {
-  default = "vpc-0d22af9a5da53f30d"
+  default = "vpc-087258d6af082341a"
 }
 
 variable "subnets" {
   type = list(string)
   default = [
-    "subnet-0ab6ee277d0b523f8",
-    "subnet-0c192bb582f2042c0",
-    "subnet-0ab26cb3321e0c2ee"
+    "subnet-00e3a6ccc939d2060",
+    "subnet-023232094ecc24bd1",
+    "subnet-013d52629578e568a"
   ]
 }
 
@@ -28,5 +28,5 @@ variable "image_tag" {
 }
 
 variable "image_repo_url" {
-  default = "847415613895.dkr.ecr.us-east-1.amazonaws.com/flask-application-demo"
+  default = "847415613895.dkr.ecr.us-east-2.amazonaws.com/flask-application-demo"
 }

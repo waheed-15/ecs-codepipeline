@@ -13,9 +13,9 @@ variable "vpc_id" {
 variable "subnets" {
   type = list(string)
   default = [
-    "subnet-0ab6ee277d0b523f8",
-    "subnet-0c192bb582f2042c0",
-    "subnet-0ab26cb3321e0c2ee"
+    "subnet-00e3a6ccc939d2060",
+    "subnet-023232094ecc24bd1",
+    "subnet-013d52629578e568a"
   ]
 }
 
