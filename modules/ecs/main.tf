@@ -65,9 +65,9 @@ resource "aws_ecs_service" "flask_app_demo" {
   }
 }
 
-output "ecs_service_arn" {
-  value = aws_ecs_service.flask_app_demo.arn
-}
+# output "ecs_service_arn" {
+#   value = aws_ecs_service.flask_app_demo.arn
+# }
 
 resource "aws_security_group" "flask_app_demo" {
   name        = "flask-app-demo"
@@ -199,13 +199,13 @@ resource "aws_iam_role_policy" "task_definition_policy" {
 EOF
 }
 
-output "ecs_cluster_arn" {
-  value = aws_ecs_cluster.flask_app_demo.arn
-}
+# output "ecs_cluster_arn" {
+#   value = aws_ecs_cluster.flask_app_demo.arn
+# }
 
-output "ecs_task_definition_arn" {
-  value = aws_ecs_task_definition.flask_app_demo.arn
-}
+# output "ecs_task_definition_arn" {
+#   value = aws_ecs_task_definition.flask_app_demo.arn
+# }
 
 # output "ecs_service_arn" {
 #   value = aws_ecs_service.flask_app_demo.arn
