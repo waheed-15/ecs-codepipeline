@@ -7,7 +7,7 @@ variable "aws_region" {
 }
 
 variable "vpc_id" {
-  default = "vpc-0d22af9a5da53f30d"
+  default = "vpc-087258d6af082341a"
 }
 
 variable "subnets" {
@@ -28,7 +28,7 @@ variable "image_tag" {
 }
 
 variable "image_repo_url" {
-  default = "847415613895.dkr.ecr.us-east-1.amazonaws.com/flask-application-demo"
+  default = "847415613895.dkr.ecr.us-east-2.amazonaws.com/flask-application-demo"
 }
 
 variable "github_repo_owner" {
