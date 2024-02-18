@@ -60,13 +60,13 @@ resource "aws_codestarconnections_connection" "example" {
 }
 
 resource "aws_s3_bucket" "codepipeline_bucket" {
-  bucket = "flask-demo-codepipeline-bucket"
+  bucket = "flask-demo-codepipeline-bucket1506"
 }
 
-resource "aws_s3_bucket_acl" "codepipeline_bucket_acl" {
-  bucket = aws_s3_bucket.codepipeline_bucket.id
-  acl    = "private"
-}
+# resource "aws_s3_bucket_acl" "codepipeline_bucket_acl" {
+#   bucket = aws_s3_bucket.codepipeline_bucket.id
+#   acl    = "public-read-write"
+# }
 
 resource "aws_iam_role" "codepipeline_role" {
   name = "flask_demo_codepipeline_role"
@@ -196,6 +196,74 @@ resource "aws_codebuild_project" "flask_app" {
   }
 }
 
+resource "aws_iam_role" "terraform_execution_role" {
+  name               = "terraform_execution_role"
+  assume_role_policy = jsonencode({
+    "Version": "2012-10-17",
+    "Statement": [{
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "ec2.amazonaws.com"  # Example service that can assume the role
+      },
+      "Action": "sts:AssumeRole"
+    }]
+  })
+
+  # Add other role configuration here
+}
+
+
+resource "aws_iam_role_policy" "terraform_execution_policy" {
+  name   = "TerraformExecutionPolicy"
+  role   = aws_iam_role.terraform_execution_role.id
+  
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect   = "Allow",
+        Action   = [
+          "s3:PutBucketAcl",
+          "s3:GetBucketAcl",
+        ],
+        Resource = [
+          "${aws_s3_bucket.codepipeline_bucket.arn}",
+        ],
+      },
+      // Add other necessary permissions here
+    ]
+  })
+}
+
+resource "aws_iam_policy" "s3_full_access_policy" {
+  name        = "s3_full_access_policy"
+  description = "Provides full access to S3 bucket and ACL"
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [{
+      Effect   = "Allow",
+      Action   = [
+        "s3:Get*",
+        "s3:List*",
+        "s3:Put*",
+        "s3:Delete*",
+        "s3:Abort*",
+        "s3:PutBucketAcl"
+      ],
+      Resource = [
+        "${aws_s3_bucket.codepipeline_bucket.arn}",
+        "${aws_s3_bucket.codepipeline_bucket.arn}/*"
+      ]
+    }]
+  })
+}
+
+resource "aws_iam_policy_attachment" "s3_access_attachment" {
+  name       = "s3_access_attachment"
+  roles      = [aws_iam_role.codepipeline_role.name]  # Assuming you are using a role
+  policy_arn = aws_iam_policy.s3_full_access_policy.arn
+}
+
 resource "aws_iam_role" "codebuild_role" {
   name = "flask_demo_codebuild_role"
 
@@ -278,3 +346,4 @@ EOF
 data "aws_kms_alias" "s3kmskey" {
   name = "alias/flask_app_s3kmskey"
 }
+
