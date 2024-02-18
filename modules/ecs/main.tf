@@ -2,6 +2,7 @@ resource "aws_ecs_cluster" "flask_app_demo" {
   name = "flask-app-demo"
 }
 
+
 resource "aws_ecs_task_definition" "flask_app_demo" {
   family                   = "flask-app-demo"
   network_mode             = "awsvpc"
@@ -40,6 +41,7 @@ DEFINITION
     cpu_architecture        = "X86_64"
   }
 }
+
 
 resource "aws_cloudwatch_log_group" "flask_app_demo" {
   name = "/ecs/flask-app-demo"
@@ -199,14 +201,14 @@ resource "aws_iam_role_policy" "task_definition_policy" {
 EOF
 }
 
-# output "ecs_cluster_arn" {
-#   value = aws_ecs_cluster.flask_app_demo.arn
-# }
+output "ecs_cluster_name" {
+  value = aws_ecs_cluster.flask_app_demo.name
+}
 
-# output "ecs_task_definition_arn" {
-#   value = aws_ecs_task_definition.flask_app_demo.arn
-# }
+output "ecs_service_name" {
+  value = aws_ecs_service.flask_app_demo.name
+}
 
-# output "ecs_service_arn" {
-#   value = aws_ecs_service.flask_app_demo.arn
-# }
+output "ecs_task_definition" {
+  value = aws_ecs_task_definition.flask_app_demo.family
+}

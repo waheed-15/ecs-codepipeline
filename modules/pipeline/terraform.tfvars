@@ -1,5 +1,5 @@
 aws_account_id = "847415613895"
-aws_region = "us-east-1"
+aws_region = "us-east-2"
 vpc_id = "vpc-0d22af9a5da53f30d"
 github_repo_name = "ecs-codepipeline"
 github_repo_owner = "waheed-15"

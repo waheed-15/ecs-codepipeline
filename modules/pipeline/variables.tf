@@ -3,7 +3,7 @@ variable "aws_account_id" {
 }
 
 variable "aws_region" {
-  default = "us-east-1"
+  default = "us-east-2"
 }
 
 variable "vpc_id" {
@@ -42,3 +42,7 @@ variable "github_repo_name" {
 variable "github_branch" {
   default = "main"
 }
+
+# variable "ecs_cluster_name" {}
+# variable "ecs_service_name" {}
+# variable "ecs_task_definition" {}

@@ -1,3 +1,7 @@
+variable "ecs_cluster_name" {}
+variable "ecs_service_name" {}
+variable "ecs_task_definition" {}
+
 resource "aws_codepipeline" "codepipeline" {
   name     = "flask_demo_pipeline"
   role_arn = aws_iam_role.codepipeline_role.arn
@@ -171,17 +175,18 @@ resource "aws_codebuild_project" "flask_app" {
       name  = "IMAGE_TAG"
       value = var.image_tag
     }
+
     environment_variable {
       name  = "ECS_CLUSTER_NAME"
-      value = aws_ecs_cluster.flask_app_demo.name
+      value = var.ecs_cluster_name
     }
     environment_variable {
       name  = "ECS_SERVICE_NAME"
-      value = aws_ecs_service.flask_app_demo.name
+      value = var.ecs_service_name
     }
     environment_variable {
       name  = "ECS_TASK_DEFINITION"
-      value = aws_ecs_task_definition.flask_app_demo.family
+      value = var.ecs_task_definition
     }
   }
 
